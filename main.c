@@ -14,6 +14,8 @@
 #define LINHAS 7
 #define COLUNAS 50
 
+char tela[LINHAS][COLUNAS];
+
 void limpar() {
     system("clear");
 }
@@ -23,11 +25,29 @@ void press_enter(){
     getchar();
 }
 
+void renderizar_caixa() {
+    
+    int i,j;
+    for(i=0; i<LINHAS; i++){
+        for(j=0, j<COLUNAS, j++){
+            if( i==0 || i < LINHAS-1) tela[i][j]='-';
+            else if (j == 0 || j == COLUNAS - 1) tela[i][j] = '|';
+            else tela[i][j]=' ';
+        }
+    }
+    tela[0][0] = '+';
+    tela[0][COLUNAS-1] = '+';
+    tela[LINHAS - 1][0] = '+';
+    tela[LINHAS - 1][COLUNAS - 1] = '+';
+
+}
+
 void tela_inicial(){
 
     int op;
     limpar();
 
+    renderizar_caixa();
     printf(COLOR_GREEN "\n\n 1 - Iniciar   0 - Sair\n\n" RESET "Escolha a opção: ");
     scanf("%d",&op);
     limpar();
