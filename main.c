@@ -1,5 +1,6 @@
 #include "stdio.h"
 #include "stdlib.h"
+#include "unistd.h"
 
 #define COLOR_MAGENTA   "\033[0;35m"
 #define COLOR_RED       "\033[0;31m"
@@ -10,8 +11,16 @@
 #define COLOR_CYAN      "\033[0;36m"
 #define RESET           "\033[0m"
 
+#define LINHAS 7
+#define COLUNAS 50
+
 void limpar() {
     system("clear");
+}
+
+void press_enter(){
+    printf("Aperte ENTER para prosseguir...\n");
+    getchar();
 }
 
 void tela_inicial(){
@@ -19,7 +28,7 @@ void tela_inicial(){
     int op;
     limpar();
 
-    printf(COLOR_GREEN "\n\nEscolha a opção: 1 - Iniciar   0 - Sair\n\n" RESET "Escolha a opção: ");
+    printf(COLOR_GREEN "\n\n 1 - Iniciar   0 - Sair\n\n" RESET "Escolha a opção: ");
     scanf("%d",&op);
     limpar();
     if(op){
@@ -27,10 +36,20 @@ void tela_inicial(){
     }else{
         printf(COLOR_RED "\n\nSaindo\n\n" RESET);
     }
+    getchar();
+    press_enter();
 }
 
 int main () {
+    limpar();
+    printf(COLOR_CYAN);
+    printf("+---------------------------------------+\n");
+    printf("|                                       |\n");
+    printf("|            RPG - THE GAME             |\n");
+    printf("|                                       |\n");
+    printf("+---------------------------------------+\n\n");
+    printf(RESET);
+    press_enter();
     tela_inicial();
-    getchar();
     return 0;
 }
