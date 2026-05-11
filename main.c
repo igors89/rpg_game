@@ -16,11 +16,8 @@
 #define COLOR_CYAN      "\033[0;36m"
 #define DEFAULT           "\033[0m"
 
-#define LINHAS 7
-#define COLUNAS 50
-
-char tela[LINHAS][COLUNAS];
-int i,j;
+// #define LINHAS 7
+// #define COLUNAS 50
 
 void limpar() {
     #ifdef _WIN32
@@ -35,19 +32,36 @@ void press_enter(){
     getchar();
 }
 
-void montar_caixa() {
+void renderizar_caixa(int linhas, int colunas) {
     
-    for(i=0; i<LINHAS; i++){
-        for(j=0; j<COLUNAS; j++){
-            if( i==0 || i < LINHAS-1) tela[i][j]='-';
-            else if (j == 0 || j == COLUNAS - 1) tela[i][j] = '|';
+    char tela[linhas][colunas];
+    int i,j;
+
+    printf("linhas = %d colunas = %d\n\n",linhas, colunas);
+    for(i=0; i<linhas; i++){
+        for(j=0; j<colunas; j++){
+            if( i==0 || i < linhas-1) tela[i][j]='-';
+            else if (j == 0 || j == colunas - 1) tela[i][j] = '|';
             else tela[i][j]=' ';
         }
     }
     tela[0][0] = '+';
-    tela[0][COLUNAS-1] = '+';
-    tela[LINHAS - 1][0] = '+';
-    tela[LINHAS - 1][COLUNAS - 1] = '+';
+    tela[0][colunas-1] = '+';
+    tela[linhas - 1][0] = '+';
+    tela[linhas - 1][colunas - 1] = '+';
+
+    // int centro = sizeof(texto)/2;
+    // int linha_texto = 2;
+    // int coluna_inicial = (colunas/2)-centro;
+    // for(int k=0; k < centro*2; k++){
+    //     tela[linha_texto][coluna_inicial+k] = texto[k];
+    // }
+    for(i=0; i<linhas;i++){
+        for(j=0;j<colunas;j++){
+            printf("%c",tela[i][j]);
+        }
+        printf("\n");
+    }
 
 }
 
@@ -61,7 +75,7 @@ void tela_inicial(){
     int op;
     limpar();
 
-    montar_caixa();
+    // montar_caixa();
     printf(COLOR_GREEN "\n\n 1 - Iniciar   0 - Sair\n\n" DEFAULT "Escolha a opção: ");
     scanf("%d",&op);
     limpar();
@@ -80,29 +94,7 @@ int main () {
     limpar();
     printf(COLOR_CYAN);
     char titulo[] = "RPG - THE GAME";
-    int centro = sizeof(titulo)/2;
-    for(i=0; i<5; i++){
-        for(j=0; j<30; j++){
-            if( i==0 || i == 4) tela[i][j]='-';
-            else if (j == 0 || j == 29) tela[i][j] = '|';
-            else tela[i][j]=' ';
-        }
-    }
-    tela[0][0] = '+';
-    tela[0][30-1] = '+';
-    tela[5 - 1][0] = '+';
-    tela[5 - 1][30 - 1] = '+';
-    int linha_texto = 2;
-    int coluna_inicial = 16-centro;
-    for(int k=0; k < sizeof(titulo); k++){
-        tela[linha_texto][coluna_inicial+k] = titulo[k];
-    }
-    for(i=0; i<LINHAS;i++){
-        for(j=0;j<COLUNAS;j++){
-            printf("%c",tela[i][j]);
-        }
-        printf("\n");
-    }
+    renderizar_caixa(5,30);
     printf(DEFAULT);
     press_enter();
     tela_inicial();
