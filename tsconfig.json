@@ -6,6 +6,6 @@
         "noEmitOnError": true
     },
     "include": [
-        "src/**/*"
+        "./src/**/*"
     ]
 }

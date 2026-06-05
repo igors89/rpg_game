@@ -1,9 +1,9 @@
 "use strict";
 const elementoFormulario = document.querySelector('.block-nova-transacao form');
-elementoFormulario.addEventListener("submit", function (event) {
-    event.preventDefault();
+elementoFormulario.addEventListener("submit", function (evt) {
+    evt.preventDefault();
     if (!elementoFormulario.checkValidity()) {
-        alert("por favor, preencha todos os campos da transacao!");
+        alert("preencha todos os campos!");
         return;
     }
     const inputTipoTransacao = elementoFormulario.querySelector('#tipoTransacao');
@@ -19,7 +19,7 @@ elementoFormulario.addEventListener("submit", function (event) {
         saldo -= valor;
     }
     else {
-        alert("Tipo de Transação é inválido!");
+        alert("Tipo de Transação inválido!");
         return;
     }
     elementoSaldo.textContent = saldo.toString();
