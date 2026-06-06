@@ -1,3 +1,7 @@
+import { Transacao } from '../types/Transacao.js';
+import { TipoTransacao } from '../types/TipoTransacao.js';
+import { atualizarSaldo, getSaldo } from './saldo-component.js';
+
 const elementoFormulario = document.querySelector('.block-nova-transacao form') as HTMLFormElement;
 elementoFormulario.addEventListener("submit", function(evt){
     evt.preventDefault();
@@ -13,6 +17,7 @@ elementoFormulario.addEventListener("submit", function(evt){
     let tipoTransacao = inputTipoTransacao.value as TipoTransacao;
     let valor = inputValor.valueAsNumber;
     let data = new Date(inputData.value);
+    let saldo: number = getSaldo();
 
     if (tipoTransacao == "Depósito"){
         saldo += valor;
@@ -22,7 +27,8 @@ elementoFormulario.addEventListener("submit", function(evt){
         alert("Tipo de Transação inválido!");
         return; 
     }
-    elementoSaldo.textContent = saldo.toString();
+    
+    atualizarSaldo(saldo);
     
     const novaTransacao: Transacao = {
         tipoTransacao: tipoTransacao,
